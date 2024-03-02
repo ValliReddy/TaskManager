@@ -56,26 +56,26 @@
 
 
 					<!-- Start Sign In Form -->
-					<form action="#" class="fh5co-form animate-box" data-animate-effect="fadeInRight">
+					<form action="/signup" method="post" class="fh5co-form animate-box" data-animate-effect="fadeInRight">
 						<h2>Sign Up</h2>
 						<div class="form-group">
 							<div class="alert alert-success" role="alert">Your info has been saved.</div>
 						</div>
 						<div class="form-group">
 							<label for="name" class="sr-only">Name</label>
-							<input type="text" class="form-control" id="name" placeholder="Name" autocomplete="off">
+							<input type="text" class="form-control" id="name" name="name" placeholder="Name" autocomplete="off">
 						</div>
 						<div class="form-group">
 							<label for="email" class="sr-only">Email</label>
-							<input type="email" class="form-control" id="email" placeholder="Email" autocomplete="off">
+							<input type="email" class="form-control" id="email" name="email" placeholder="Email" autocomplete="off">
 						</div>
 						<div class="form-group">
 							<label for="password" class="sr-only">Password</label>
-							<input type="password" class="form-control" id="password" placeholder="Password" autocomplete="off">
+							<input type="password" class="form-control" id="password" name="password" placeholder="Password" autocomplete="off">
 						</div>
 						<div class="form-group">
 							<label for="re-password" class="sr-only">Re-type Password</label>
-							<input type="password" class="form-control" id="re-password" placeholder="Re-type Password" autocomplete="off">
+							<input type="password" class="form-control" id="re-password" name="re-password" placeholder="Re-type Password" autocomplete="off">
 						</div>
 						<div class="form-group">
 							<label for="remember"><input type="checkbox" id="remember"> Remember Me</label>
