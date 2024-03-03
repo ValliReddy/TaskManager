@@ -12,6 +12,10 @@ db.init_app(app)
 def Home():
     session["show_edit"] = False
     return render_template("index.html")
+
+@app.route("/contact",methods=["GET","POST"])
+def Contact():
+    return render_template("contact.html")
 @app.route("/login",methods=["GET","POST"])
 def login():
     if request.method == "POST":

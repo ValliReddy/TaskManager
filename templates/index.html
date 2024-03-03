@@ -58,6 +58,7 @@
 						<ul>
 							<li class="active"><a href="{{url_for('Home')}}">Home</a></li>
 							<li><a href="{{url_for('signup')}}">Sign up</a></li>
+							<li><a href="{{url_for('Contact')}}">Contact</a></li>
 							<li class="btn-cta"><a href="{{url_for('login')}}"><span>Login</span></a></li>
 						</ul>
 					</div>
@@ -82,8 +83,92 @@
 			</div>
 		</div>
 	</header>
+	<div id="fh5co-features">
+		<div class="container">
+			<div class="services-padding">
+				<div class="row">
+					<div class="col-md-4 animate-box">
+						<div class="feature-left">
+							<span class="icon">
+								<i class="icon-pencil"></i>
+							</span>
+							<div class="feature-copy">
+								<h3>Task Creation</h3>
+								<p>Create tasks effortlessly and efficiently. Add titles, descriptions, dates to stay organized.</p>
+							</div>
+						</div>
+					</div>
 
-			<div class="row copyright">
+					<div class="col-md-4 animate-box">
+						<div class="feature-left">
+							<span class="icon">
+								<i class="icon-cog"></i>
+							</span>
+							<div class="feature-copy">
+								<h3>Task Editing</h3>
+                                <p>Edit existing tasks seamlessly. Update titles, descriptions, dates as needed to keep information up-to-date.</p>
+							</div>
+						</div>
+
+					</div>
+					<div class="col-md-4 animate-box">
+						<div class="feature-left">
+							<span class="icon">
+								<i class="icon-bin"></i>
+							</span>
+							<div class="feature-copy">
+								<h3>Task Deletion</h3>
+                                <p>Delete tasks that are no longer relevant or necessary. Keep your task list clean and clutter-free.</p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="row">
+					<div class="col-md-4 animate-box">
+
+						<div class="feature-left">
+							<span class="icon">
+								<i class="icon-lock"></i>
+							</span>
+							<div class="feature-copy">
+								<h3>Task Security</h3>
+                                <p>Ensure the security of your tasks. Access tasks securely with authentication, ensuring only authorized users can view and manage them.</p>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="col-md-4 animate-box">
+						<div class="feature-left">
+							<span class="icon">
+								<i class="icon-heart"></i>
+							</span>
+							<div class="feature-copy">
+								<h3>Intuitive Design</h3>
+                                <p>Experience an intuitive and user-friendly interface. Our website is designed with ease of use in mind, ensuring a seamless user experience.</p>
+							</div>
+						</div>
+
+					</div>
+					<div class="col-md-4 animate-box">
+						<div class="feature-left">
+							<span class="icon">
+								<i class="icon-chat"></i>
+							</span>
+							<div class="feature-copy">
+								<h3>Support</h3>
+                                <p>Get help whenever you need it. Our dedicated support team is here to assist you with any questions or issues you may encounter.</p>
+								<p><a href="{{url_for('Contact')}}">Learn More <i class="icon-arrow-right22"></i></a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row copyright">
 				<div class="col-md-12 text-center">
 					<p>
 						<small class="block">&copy; All Rights Reserved.</small>
@@ -115,6 +200,8 @@
 	<script src="static/js/jquery.flexslider-min.js"></script>
 	<!-- Main -->
 	<script src="static/js/main.js"></script>
+
+	</div>
 
 	</body>
 </html>
