@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for,session
-from models import db,Task,User
+from models import db,User,Task
 
 
 app = Flask(__name__)
@@ -7,11 +7,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///task_manager_new.db'
 app.secret_key = "secret_keying"
 db.init_app(app)
 
-task_list=[]
+
 @app.route("/",methods=["GET","POST"])
 def Home():
+    session["show_edit"] = False
     return render_template("index.html")
-
 @app.route("/login",methods=["GET","POST"])
 def login():
     if request.method == "POST":
@@ -43,19 +43,57 @@ def signup():
 def task():
     if  request.method == "POST":
         return render_template("task.html", show_form=True)
-    return render_template("task.html")
+    return redirect(url_for('fill'))
 
-@app.route("/fill",methods=["POST"])
+
+@app.route("/fill",methods=["GET","POST"])
 def fill():
-    task_date = request.form["taskdate"]
-    task_name = request.form["taskname"]
-    task_description = request.form["taskdes"]
-    task_list.append({'date': task_date, 'name': task_name, 'description':task_description})
-    return render_template("task.html",all=task_list)
+    tasks = Task.query.all()
+    if request.method == "POST":
+        task_date1 = request.form["taskdate"]
+        task_name1 = request.form["taskname"]
+        task_description1 = request.form["taskdes"]
+        # task_list.append({'date': task_date1, 'name': task_name1, 'description':task_description1})
+        new_task = Task(task_date=task_date1, task_name=task_name1,task_description=task_description1,email=session["name"])
+        db.session.add(new_task)
+        db.session.commit()
+        return redirect(url_for('fill'))
+    return render_template("task.html",all=tasks,check_email=session["name"])
+
+@app.route('/delete_task/<int:task_id>', methods=['GET', 'POST'])
+def delete_task(task_id):
+    if request.method == 'POST':
+            task = Task.query.get_or_404(task_id)
+            db.session.delete(task)
+            db.session.commit()
+            return redirect(url_for('fill'))
 
 
+@app.route("/edit_task/<int:id>",methods=["GET","POST"])
+def edit_task(id):
+    if  request.method == "POST":
+        session["target"]=id
+        print(session["target"])
+        session["show_edit"]=True
+        return redirect(url_for('fill'))
+    return redirect(url_for('fill'))
 
 
+@app.route("/edit_content",methods=["GET","POST"])
+def edit_content():
+    t_id = session.get("target")
+    target=Task.query.filter_by(id=t_id).first()
+    if  request.method == "POST":
+        task_date2 = request.form["edit_date"]
+        task_name2 = request.form["edit_name"]
+        task_description2 = request.form["edit_des"]
+        target.task_date=task_date2
+        target.task_name=task_name2
+        target.task_description=task_description2
+        db.session.commit()
+        session["show_edit"] = False
+        return redirect(url_for('fill'))
+    return redirect(url_for('fill'))
 
 
 if __name__=="__main__":

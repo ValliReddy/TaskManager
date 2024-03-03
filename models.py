@@ -1,11 +1,15 @@
 from flask_sqlalchemy import SQLAlchemy
 import bcrypt
 
+
 db = SQLAlchemy()
 
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    task = db.Column(db.String(250))
+    task_date = db.Column(db.String(250))
+    task_name = db.Column(db.String(250))
+    task_description = db.Column(db.String(250))
+    email = db.Column(db.String(250))
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
