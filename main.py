@@ -1,12 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for,session
+import os
 from models import db,User,Task
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///task_manager_new.db'
-app.secret_key = "secret_keying"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URL","sqlite:///task_manager_new.db")
+app.secret_key = os.environ.get("FLASK_KEY")
 db.init_app(app)
-
+flask_key = os.getenv("FLASK_KEY")
+print("FLASK_KEY:", flask_key)
 
 @app.route("/",methods=["GET","POST"])
 def Home():
@@ -105,4 +107,4 @@ if __name__=="__main__":
         # db.drop_all()
         db.create_all()
 
-    app.run(debug=True)
+    app.run(debug=False)
