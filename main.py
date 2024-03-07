@@ -4,7 +4,7 @@ from models import db,User,Task
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URL","sqlite:///task_manager_new.db")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URL")
 app.secret_key = os.environ.get("FLASK_KEY")
 db.init_app(app)
 flask_key = os.getenv("FLASK_KEY")
