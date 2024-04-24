@@ -1,24 +1,27 @@
 from flask import Flask, render_template, request, redirect, url_for,session
 import os
 from models import db,User,Task
+# from flask_cors import CORS
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URL","sqlite:///task_manager_new.db")
-app.secret_key = os.environ.get("FLASK_KEY")
+# CORS(application)
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://admin:Taskmanager@task-manager-new.cjc6ygok2t7b.eu-north-1.rds.amazonaws.com/task_manager_new"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+app.secret_key = "secret-keying"
 db.init_app(app)
-flask_key = os.getenv("FLASK_KEY")
-print("FLASK_KEY:", flask_key)
+# flask_key = os.getenv("FLASK_KEY")
+# print("FLASK_KEY:", flask_key)
 
-@app.route("/",methods=["GET","POST"])
+@app.route("/", methods=["GET", "POST"])
 def Home():
     session["show_edit"] = False
     return render_template("index.html")
 
-@app.route("/contact",methods=["GET","POST"])
+@app.route("/contact", methods=["GET", "POST"])
 def Contact():
     return render_template("contact.html")
-@app.route("/login",methods=["GET","POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         name = request.form["name"]
@@ -31,7 +34,7 @@ def login():
         else:
             return render_template("login.html", error="Invalid user or password")
     return render_template("login.html")
-@app.route("/signup",methods=["GET","POST"])
+@app.route("/signup", methods=["GET", "POST"])
 def signup():
   if request.method == "POST":
     name = request.form["name"]
@@ -45,14 +48,14 @@ def signup():
   return render_template("signup.html")
 
 
-@app.route("/task",methods=["GET","POST"])
+@app.route("/task", methods=["GET", "POST"])
 def task():
     if  request.method == "POST":
         return render_template("task.html", show_form=True)
     return redirect(url_for('fill'))
 
 
-@app.route("/fill",methods=["GET","POST"])
+@app.route("/fill", methods=["GET", "POST"])
 def fill():
     tasks = Task.query.all()
     if request.method == "POST":
@@ -75,7 +78,7 @@ def delete_task(task_id):
             return redirect(url_for('fill'))
 
 
-@app.route("/edit_task/<int:id>",methods=["GET","POST"])
+@app.route("/edit_task/<int:id>", methods=["GET", "POST"])
 def edit_task(id):
     if  request.method == "POST":
         session["target"]=id
@@ -85,7 +88,7 @@ def edit_task(id):
     return redirect(url_for('fill'))
 
 
-@app.route("/edit_content",methods=["GET","POST"])
+@app.route("/edit_content", methods=["GET", "POST"])
 def edit_content():
     t_id = session.get("target")
     target=Task.query.filter_by(id=t_id).first()
@@ -107,4 +110,4 @@ if __name__=="__main__":
         # db.drop_all()
         db.create_all()
 
-    app.run(debug=False)
+    app.run(debug=True)
