@@ -1,17 +1,16 @@
-from flask import Flask, render_template, request, redirect, url_for,session
+from flask import Flask, render_template, request, redirect, url_for, session
 import os
-from models import db,User,Task
-# from flask_cors import CORS
-
+from models import db, User, Task
 
 app = Flask(__name__)
-# CORS(application)
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://admin:Taskmanager@task-manager-new.cjc6ygok2t7b.eu-north-1.rds.amazonaws.com/task_manager_new"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+
+# Database configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///task_manager_new.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = "secret-keying"
+
+# Initialize the database with the app
 db.init_app(app)
-# flask_key = os.getenv("FLASK_KEY")
-# print("FLASK_KEY:", flask_key)
 
 @app.route("/", methods=["GET", "POST"])
 def Home():
