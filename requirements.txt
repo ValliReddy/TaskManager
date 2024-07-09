@@ -1,8 +1,5 @@
 Flask
-Flask-SQLAlchemy
-SQLAlchemy
-gunicorn
-psycopg2-binary
+Flask-PyMongo
 bcrypt
-mysqlclient
-pymysql
+python-dotenv
+gunicorn
